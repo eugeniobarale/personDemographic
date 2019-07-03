@@ -1,0 +1,7 @@
+com/persondemographic/service/UserServiceImpl.class
+com/persondemographic/model/User.class
+com/persondemographic/repository/UserRepository.class
+com/persondemographic/controller/PersonDemographicController.class
+com/persondemographic/configuration/WebConfig.class
+com/persondemographic/service/UserService.class
+com/persondemographic/PersonDemographicApplication.class

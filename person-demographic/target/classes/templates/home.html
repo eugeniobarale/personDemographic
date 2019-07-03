@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Person Demographic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+
+</head>
+ 
+<body>
+    <div class="container">
+    <div class="row align-items-center justify-content-center" style="height:100vh;">     
+    <a th:href="@{/createUser}" class="btn btn-outline-primary mr-1" role="button">Add a new record</a>
+    <a th:href="@{/listUsers}" class="btn btn-outline-primary mr-1" role="button">List all records</a>
+    </div>
+   </div>
+</body>
+ 
+</html>

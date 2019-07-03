@@ -1,0 +1,13 @@
+package com.persondemographic;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class PersonDemographicApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(PersonDemographicApplication.class, args);
+	}
+
+}

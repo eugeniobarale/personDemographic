@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Person Demographic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery-ui.css}"/>
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.js}"></script>
+    
+
+</head>
+ <script type="text/javascript">
+ 
+ $(function() {
+	 
+     $("#dateOfBirth").datepicker({       changeMonth: true,
+         changeYear: true,
+maxDate: new Date,dateFormat:"dd/mm/yy"});
+
+     
+  });
+
+ 
+ $(document).ready(function() {
+	    $.validator.addMethod("phoneCheck", function(value, element) {
+	    	if(value=="" || value ==null ) return true;
+	        return  value.startsWith("08");
+	    }, "Mobile Phone must begin with 08 prefix");
+	 
+	 $.validator.addMethod("minAge", function(value, element, min) {
+		    var today = new Date();
+		    var birthDate = $("#dateOfBirth").datepicker("getDate");
+
+		    var age = today.getFullYear() - birthDate.getFullYear();
+		 
+		    if (age > min+1) {
+		        return true;
+		    }
+		 
+		    var m = today.getMonth() - birthDate.getMonth();
+		 
+		    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+		        age--;
+		    }
+     		 
+		    return age >= min;
+		},"You must be at least 16 years old!");
+	  $("#userForm").validate({
+	    rules: {
+	      name : {
+	        required: true,
+	      },
+	      ppsNumber : {
+		        required: true,
+		      },
+		     
+	      dateOfBirth: {
+	        required: true,
+	        minAge: 16
+	      },
+	      mobilePhone: {
+	        required: false,
+	        phoneCheck:true
+	      },
+	    }
+	    	  
+	  });
+	});
+ 
+ </script>
+<body>
+	
+    <div style="margin-top:7%;margin-left:5%" class="container">
+	<div th:text="${userRegistered}" class="alert alert-success" role="alert" th:if="${userRegistered!=null}"></div>
+	<div th:text="${userAlreadyRegistered}" class="alert alert-danger" role="alert" th:if="${userAlreadyRegistered!=null}"></div>
+	
+   
+
+<form id="userForm" action="#" th:action="@{/doCreateUser}" th:object="${user}" method="post">
+
+
+<div class="form-group row">
+  <label for="name" class="col-2 col-form-label">Name</label>
+  <div class="col-10">
+    <input id="name" class="form-control"  th:field="*{name}" type="text">
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="ppsNumber" class="col-2 col-form-label">PPS number</label>
+  <div class="col-10">
+    <input class="form-control" id="ppsNumber" type="number" th:field="*{ppsNumber}">
+  </div>
+</div>
+
+
+<div class="form-group row">
+  <label for="dateOfBirth" class="col-2 col-form-label">Date of Birth</label>
+  <div class="col-10">
+    <input class="form-control" id="dateOfBirth" type="text" th:field="*{dateOfBirth}">
+  </div>
+</div>  
+<div class="form-group row">
+  <label for="mobilePhone" class="col-2 col-form-label">Mobile Phone</label>
+  <div class="col-10">
+    <input class="form-control" type="tel" id="mobilePhone" th:field="*{mobilePhone}">
+  </div>
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+
+
+</form>
+
+    <a style="margin-top:2%" th:href="@{/}" class="btn btn-primary" role="button">Home</a>
+
+    </div>
+</body>
+ 
+ 
+   
+
+ 
+ 
+</html>

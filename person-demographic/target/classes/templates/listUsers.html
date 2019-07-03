@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Person Demographic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    
+
+</head>
+ <body>
+    <div style="margin-top:5%;margin-left:5%" class="container">
+	
+	
+ <div  class="alert alert-info" th:if="${users.empty}">No records have been created</div>	
+
+
+ <div  th:if="${users!=null and !users.empty}">
+
+	<h3>Registered users</h3>
+	
+	<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">PPS number</th>
+      <th scope="col">Date of Birth</th>
+      <th scope="col">Mobile Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user: ${users}">
+      <td th:text="${user.name}" />
+      <td th:text="${user.ppsNumber}" />
+      <td th:text="${#dates.format(user.dateOfBirth, 'dd/MM/yyyy')}" />
+      <td th:text="${user.mobilePhone}" />
+  </tr>
+  
+  
+  </tbody>
+</table>
+	
+</div>	
+
+    <a th:href="@{/}" class="btn btn-primary" role="button">Home</a>
+
+	</div>
+</body>
+ 
+ 
+   
+
+ 
+ 
+</html>
